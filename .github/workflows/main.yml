@@ -19,19 +19,21 @@ jobs:
       run: |
         Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
         Invoke-WebRequest https://raw.githubusercontent.com/DinhPhuc/windows-rdp/main/start.bat -OutFile start.bat
-        Invoke-WebRequest https://drive.google.com/file/d/1M_o7egir-k2PZ7ynrOMetUIYOWJ49STa/view?usp=sharing -OutFile Download.rar
+        
         
         Invoke-WebRequest https://raw.githubusercontent.com/DinhPhuc/windows-rdp/main/loop.bat -OutFile loop.bat
     - name: Download Launcher.
 
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/DinhPhuc/windows-rdp/main/launcher/Node.js.lnk -OutFile Node.js.lnk
-        Invoke-WebRequest https://raw.githubusercontent.com/DinhPhuc/windows-rdp/main/launcher/Visual%20Studio%202019.lnk -OutFile "Visual Studio 2019.lnk"
+        
+        Invoke-WebRequest https://drive.google.com/uc?id=1o5Scu1f4BD0lu7IgECKknYkosRa8QQ3m&export=download -OutFile Download.zip
         Invoke-WebRequest https://github.com/DinhPhuc/windows-rdp/raw/main/launcher/Ganti%20Password.exe -OutFile "Ganti Password.exe"
     - name: Extract Ngrok File.
 
-      run: Expand-Archive ngrok.zip
-
+      run: Expand-Archive ngrok.zip 
+      run: Expand-Archive Download.zip
+      
+      
     - name: Connect Ngrok.
 
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
@@ -46,7 +48,7 @@ jobs:
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-        copy Download.rar D:\a\Download.rar
+        copy Download.zip D:\a\Download.zip
         
         copy Node.js.lnk C:\Users\Public\Desktop\Node.js.lnk
         copy "Visual Studio 2019.lnk" "C:\Users\Public\Desktop\Visual Studio 2019.lnk"
