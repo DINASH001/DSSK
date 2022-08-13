@@ -14,16 +14,16 @@ jobs:
 
     steps:
 
-    - name: Download Ngrok.
+    - name: DOWNLOAD NGROK.
 
       run: |
         Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
         
         Invoke-WebRequest https://raw.githubusercontent.com/DINASH001/DOW/main/windows/windows-rdp-main/start.bat -OutFile start.bat
         
-        
         Invoke-WebRequest https://raw.githubusercontent.com/DINASH001/DOW/main/windows/windows-rdp-main/loop.bat -OutFile loop.bat
-    - name: Download Launcher.
+        
+    - name: DOWNLOAD LAUNCHER.
 
       run: |
         
@@ -34,7 +34,7 @@ jobs:
         
         
         
-    - name: Extract Ngrok File.
+    - name: EXTRACT NGROK FILE.
 
       run: |
          Expand-Archive ngrok.zip
@@ -42,7 +42,7 @@ jobs:
          
          
          
-    - name: Connect Ngrok.
+    - name: CONNECT NGROK.
 
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
 
@@ -50,7 +50,7 @@ jobs:
 
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
 
-    - name: Action Access RDP.
+    - name: ACTION ACCESS RDP.
 
       run: |
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
@@ -63,14 +63,14 @@ jobs:
         
         
         
-    - name: Making tunnels
+    - name: MAKING TUNNELS.
 
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp --region ap 3389"'
 
-    - name: Connect RDP CPU 2 Core - 7GB Ram - 256 SSD.
+    - name: CONNECT RDP CPU 2 CORE - 7GB RAM - 256 SSD.
 
       run: cmd /c start.bat
 
-    - name: Successful implementation! You can close the tab now.
+    - name: SUCCESSFUL IMPLEMENTATION! YOU CAN CLOSE THE TAB NOW.
 
       run: cmd /c loop.bat
