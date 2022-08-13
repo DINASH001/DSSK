@@ -31,9 +31,7 @@ jobs:
     - name: Extract Ngrok File.
 
       run: Expand-Archive ngrok.zip 
-      run: Expand-Archive Download.zip
-      
-      
+         
     - name: Connect Ngrok.
 
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
