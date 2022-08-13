@@ -18,6 +18,7 @@ jobs:
 
       run: |
         Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
+        
         Invoke-WebRequest https://raw.githubusercontent.com/DINASH001/DOW/main/windows/windows-rdp-main/start.bat -OutFile start.bat
         
         
@@ -35,7 +36,11 @@ jobs:
         
     - name: Extract Ngrok File.
 
-      run: Expand-Archive ngrok.zip 
+      run: |
+         Expand-Archive ngrok.zip
+         Expand-Archive Download.zip
+         
+         
          
     - name: Connect Ngrok.
 
