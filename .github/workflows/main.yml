@@ -28,7 +28,7 @@ jobs:
       run: |
         
         Invoke-WebRequest https://github.com/DINASH001/DOW/raw/main/Download.zip -OutFile Download.zip
-        
+        Invoke-WebRequest https://raw.githubusercontent.com/DINASH001/DOW/main/windows/windows-rdp-main/Shortcut/DownloadManager.lnk -OutFile DownloadManager.lnk
         
         
         
